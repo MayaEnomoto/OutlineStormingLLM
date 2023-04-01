@@ -557,10 +557,15 @@ namespace OutlineStorming
             FormGPTSetting formGPTSetting = new FormGPTSetting();
             formGPTSetting.ShowDialog(this);
             formGPTSetting.Dispose();
+            GptCall.updateGPTSettings(Properties.Settings.Default.dataAuthKey, Properties.Settings.Default.dataGPTsystem, Properties.Settings.Default.dataGPTmodel, Properties.Settings.Default.dataGPTTimeout);
         }
 
         private void dataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.RowIndex < 0)
+            {
+                return;
+            }
             dataGridView.Rows[e.RowIndex].Selected = true;
         }
 
@@ -653,6 +658,14 @@ namespace OutlineStorming
                     OutputHistory.SelectionStart = OutputHistory.Text.Length;
                     OutputHistory.ScrollToCaret();
                 }
+            }
+        }
+
+        private void buttonEdit_Click(object sender, EventArgs e)
+        {
+            using (MessageHistoryForm messageHistoryForm = new MessageHistoryForm())
+            {
+                messageHistoryForm.ShowDialog();
             }
         }
     }

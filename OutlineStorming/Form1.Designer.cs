@@ -60,6 +60,7 @@
             gPTSettingToolStripMenuItem = new ToolStripMenuItem();
             tableLayoutPanel1 = new TableLayoutPanel();
             panel3 = new Panel();
+            buttonEdit = new Button();
             buttonImport = new Button();
             buttonExport = new Button();
             panel2 = new Panel();
@@ -81,7 +82,7 @@
             OutputHistory.Name = "OutputHistory";
             OutputHistory.ReadOnly = true;
             OutputHistory.ScrollBars = ScrollBars.Vertical;
-            OutputHistory.Size = new Size(497, 427);
+            OutputHistory.Size = new Size(497, 187);
             OutputHistory.TabIndex = 0;
             // 
             // dataGridView
@@ -97,7 +98,7 @@
             dataGridView.RowHeadersWidth = 82;
             dataGridView.RowTemplate.Height = 41;
             dataGridView.ScrollBars = ScrollBars.Vertical;
-            dataGridView.Size = new Size(495, 677);
+            dataGridView.Size = new Size(495, 437);
             dataGridView.TabIndex = 1;
             dataGridView.CellClick += dataGridView_CellClick;
             dataGridView.CellContentClick += dataGridView_CellContentClick;
@@ -111,7 +112,7 @@
             // btnAddRow
             // 
             btnAddRow.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            btnAddRow.Location = new Point(2, 732);
+            btnAddRow.Location = new Point(2, 492);
             btnAddRow.Margin = new Padding(2, 1, 2, 1);
             btnAddRow.Name = "btnAddRow";
             btnAddRow.Size = new Size(150, 50);
@@ -123,7 +124,7 @@
             // btnDeleteRow
             // 
             btnDeleteRow.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            btnDeleteRow.Location = new Point(2, 784);
+            btnDeleteRow.Location = new Point(2, 544);
             btnDeleteRow.Margin = new Padding(2, 1, 2, 1);
             btnDeleteRow.Name = "btnDeleteRow";
             btnDeleteRow.Size = new Size(150, 50);
@@ -163,14 +164,14 @@
             txtNote.Multiline = true;
             txtNote.Name = "txtNote";
             txtNote.ScrollBars = ScrollBars.Vertical;
-            txtNote.Size = new Size(242, 527);
+            txtNote.Size = new Size(242, 287);
             txtNote.TabIndex = 8;
             txtNote.TextChanged += txtNote_TextChanged;
             // 
             // btnResetSort
             // 
             btnResetSort.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            btnResetSort.Location = new Point(310, 785);
+            btnResetSort.Location = new Point(310, 545);
             btnResetSort.Margin = new Padding(2, 1, 2, 1);
             btnResetSort.Name = "btnResetSort";
             btnResetSort.Size = new Size(150, 50);
@@ -182,7 +183,7 @@
             // btnMoveUp
             // 
             btnMoveUp.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            btnMoveUp.Location = new Point(156, 732);
+            btnMoveUp.Location = new Point(156, 492);
             btnMoveUp.Margin = new Padding(2, 1, 2, 1);
             btnMoveUp.Name = "btnMoveUp";
             btnMoveUp.Size = new Size(150, 50);
@@ -194,7 +195,7 @@
             // btnMoveDown
             // 
             btnMoveDown.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            btnMoveDown.Location = new Point(156, 784);
+            btnMoveDown.Location = new Point(156, 544);
             btnMoveDown.Margin = new Padding(2, 1, 2, 1);
             btnMoveDown.Name = "btnMoveDown";
             btnMoveDown.Size = new Size(150, 50);
@@ -206,7 +207,7 @@
             // statusStrip1
             // 
             statusStrip1.ImageScalingSize = new Size(32, 32);
-            statusStrip1.Location = new Point(0, 899);
+            statusStrip1.Location = new Point(0, 659);
             statusStrip1.Name = "statusStrip1";
             statusStrip1.Padding = new Padding(1, 0, 8, 0);
             statusStrip1.Size = new Size(1264, 22);
@@ -249,7 +250,7 @@
             // btnSendRequest
             // 
             btnSendRequest.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            btnSendRequest.Location = new Point(2, 732);
+            btnSendRequest.Location = new Point(2, 492);
             btnSendRequest.Margin = new Padding(2, 1, 2, 1);
             btnSendRequest.Name = "btnSendRequest";
             btnSendRequest.Size = new Size(497, 50);
@@ -283,7 +284,7 @@
             // labelRequest
             // 
             labelRequest.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            labelRequest.Location = new Point(2, 479);
+            labelRequest.Location = new Point(2, 239);
             labelRequest.Margin = new Padding(2, 0, 2, 0);
             labelRequest.Name = "labelRequest";
             labelRequest.Size = new Size(497, 50);
@@ -294,7 +295,7 @@
             // textBoxRequest
             // 
             textBoxRequest.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            textBoxRequest.Location = new Point(2, 530);
+            textBoxRequest.Location = new Point(2, 290);
             textBoxRequest.Margin = new Padding(2, 1, 2, 1);
             textBoxRequest.MaxLength = 2000;
             textBoxRequest.Multiline = true;
@@ -407,12 +408,13 @@
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 1;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel1.Size = new Size(1264, 841);
+            tableLayoutPanel1.Size = new Size(1264, 601);
             tableLayoutPanel1.TabIndex = 29;
             // 
             // panel3
             // 
             panel3.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            panel3.Controls.Add(buttonEdit);
             panel3.Controls.Add(buttonImport);
             panel3.Controls.Add(buttonExport);
             panel3.Controls.Add(OutputHistory);
@@ -423,15 +425,26 @@
             panel3.Controls.Add(labelRequest);
             panel3.Location = new Point(760, 3);
             panel3.Name = "panel3";
-            panel3.Size = new Size(501, 835);
+            panel3.Size = new Size(501, 595);
             panel3.TabIndex = 2;
+            // 
+            // buttonEdit
+            // 
+            buttonEdit.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            buttonEdit.Location = new Point(37, 546);
+            buttonEdit.Name = "buttonEdit";
+            buttonEdit.Size = new Size(150, 46);
+            buttonEdit.TabIndex = 27;
+            buttonEdit.Text = "Edit history";
+            buttonEdit.UseVisualStyleBackColor = true;
+            buttonEdit.Click += buttonEdit_Click;
             // 
             // buttonImport
             // 
             buttonImport.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            buttonImport.Location = new Point(95, 785);
+            buttonImport.Location = new Point(193, 546);
             buttonImport.Name = "buttonImport";
-            buttonImport.Size = new Size(200, 46);
+            buttonImport.Size = new Size(150, 46);
             buttonImport.TabIndex = 26;
             buttonImport.Text = "Import history";
             buttonImport.UseVisualStyleBackColor = true;
@@ -440,9 +453,9 @@
             // buttonExport
             // 
             buttonExport.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            buttonExport.Location = new Point(298, 785);
+            buttonExport.Location = new Point(349, 546);
             buttonExport.Name = "buttonExport";
-            buttonExport.Size = new Size(200, 46);
+            buttonExport.Size = new Size(150, 46);
             buttonExport.TabIndex = 25;
             buttonExport.Text = "Export history";
             buttonExport.UseVisualStyleBackColor = true;
@@ -459,7 +472,7 @@
             panel2.Controls.Add(labelValue);
             panel2.Location = new Point(508, 3);
             panel2.Name = "panel2";
-            panel2.Size = new Size(246, 835);
+            panel2.Size = new Size(246, 595);
             panel2.TabIndex = 1;
             // 
             // panel1
@@ -475,7 +488,7 @@
             panel1.Controls.Add(labelCsvData);
             panel1.Location = new Point(3, 3);
             panel1.Name = "panel1";
-            panel1.Size = new Size(499, 835);
+            panel1.Size = new Size(499, 595);
             panel1.TabIndex = 0;
             // 
             // Form1
@@ -483,7 +496,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             AutoScroll = true;
-            ClientSize = new Size(1264, 921);
+            ClientSize = new Size(1264, 681);
             Controls.Add(tableLayoutPanel1);
             Controls.Add(menuStrip1);
             Controls.Add(statusStrip1);
@@ -491,7 +504,7 @@
             Margin = new Padding(2, 1, 2, 1);
             MinimumSize = new Size(960, 540);
             Name = "Form1";
-            Text = "Outline Storming GPT v1.4";
+            Text = "Outline Storming GPT v1.5";
             ((System.ComponentModel.ISupportInitialize)dataGridView).EndInit();
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
@@ -543,5 +556,6 @@
         private Panel panel1;
         private Button buttonExport;
         private Button buttonImport;
+        private Button buttonEdit;
     }
 }

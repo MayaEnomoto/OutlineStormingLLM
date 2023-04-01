@@ -19,6 +19,41 @@ namespace OutlineStorming
         private static int currentTimeout = Properties.Settings.Default.dataGPTTimeout;
         private static List<object> messageHistory = new List<object>();
 
+        public static void ForEachMessage(Action<string, string> action)
+        {
+            foreach (var message in messageHistory)
+            {
+                if (message is JsonElement messageElement)
+                {
+                    Dictionary<string, object> messageDict = JsonSerializer.Deserialize<Dictionary<string, object>>(messageElement.GetRawText());
+                    if (messageDict != null && messageDict.ContainsKey("role"))
+                    {
+                        string role = messageDict["role"].ToString();
+                        string content = messageDict["content"].ToString();
+                        action(role, content);
+                    }
+                }
+            }
+        }
+
+        public static List<object> GetMessageHistory()
+        {
+            return new List<object>(messageHistory);
+        }
+
+        public static void SetMessageHistory(List<object> newMessageHistory)
+        {
+            messageHistory = new List<object>(newMessageHistory);
+        }
+
+        public static void RemoveMessageAtIndex(int index)
+        {
+            if (index >= 0 && index < messageHistory.Count)
+            {
+                messageHistory.RemoveAt(index);
+            }
+        }
+
         public static void SaveMessageHistoryToFile(string filePath)
         {
             //string jsonString = JsonSerializer.Serialize(messageHistory, new JsonSerializerOptions { WriteIndented = true });
@@ -141,7 +176,9 @@ namespace OutlineStorming
             {
                 return;
             }
-            messageHistory.Add(new { role = "system", content = sys });
+            string json = JsonSerializer.Serialize(new { role = "system", content = sys });
+            JsonDocument document = JsonDocument.Parse(json);
+            messageHistory.Add(document.RootElement);
         }
 
         public static void setModel(string model)
@@ -164,7 +201,9 @@ namespace OutlineStorming
             {
                 return;
             }
-            messageHistory.Add(new { role = "user", content = req });
+            string json = JsonSerializer.Serialize(new { role = "user", content = req });
+            JsonDocument document = JsonDocument.Parse(json);
+            messageHistory.Add(document.RootElement);
         }
 
         public static void addResponse(string ans)
@@ -173,7 +212,18 @@ namespace OutlineStorming
             {
                 return;
             }
-            messageHistory.Add(new { role = "assistant", content = ans });
+            string json = JsonSerializer.Serialize(new { role = "assistant", content = ans });
+            JsonDocument document = JsonDocument.Parse(json);
+            messageHistory.Add(document.RootElement);
+
+        }
+
+        public static void updateGPTSettings(string authkey, string sys, string model, int timeout)
+        {
+            setAuthkey(authkey);
+            setRole(sys);
+            setModel(model);
+            setTimeout(timeout);
         }
 
         public static void setBaseParam(string authkey, string sys, string model, int timeout,List<string> messageList)
@@ -185,7 +235,9 @@ namespace OutlineStorming
             setTimeout(timeout);
             foreach (var input in messageList)
             {
-                messageHistory.Add(new { role = "user", content = input });
+                string json = JsonSerializer.Serialize(new { role = "user", content = input });
+                JsonDocument document = JsonDocument.Parse(json);
+                messageHistory.Add(document.RootElement);
             }
         }
 
