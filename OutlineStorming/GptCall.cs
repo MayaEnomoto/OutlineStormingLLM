@@ -105,10 +105,26 @@ namespace OutlineStorming
 
             addRequest(req);
 
+            //string jsonContent = JsonSerializer.Serialize(new
+            //{
+            //    model = currentModel,
+            //    messages = messageHistory.ToArray()
+            //});
             string jsonContent = JsonSerializer.Serialize(new
             {
                 model = currentModel,
-                messages = messageHistory.ToArray()
+                messages = messageHistory.Where(message => {
+                    if (message is JsonElement messageElement)
+                    {
+                        Dictionary<string, object> messageDict = JsonSerializer.Deserialize<Dictionary<string, object>>(messageElement.GetRawText());
+                        if (messageDict != null && messageDict.ContainsKey("role"))
+                        {
+                            string role = messageDict["role"].ToString();
+                            return role != "assistant_after_translation" && role != "user_before_translation";
+                        }
+                    }
+                    return false;
+                }).ToArray()
             });
 
             request.Content = new ByteArrayContent(System.Text.Encoding.UTF8.GetBytes(jsonContent));
@@ -195,7 +211,7 @@ namespace OutlineStorming
             currentTimeout = timeout;
         }
 
-        public static void addRequest(string req)
+        private static void addRequest(string req)
         {
             if (String.IsNullOrWhiteSpace(req))
             {
@@ -206,7 +222,7 @@ namespace OutlineStorming
             messageHistory.Add(document.RootElement);
         }
 
-        public static void addResponse(string ans)
+        private static void addResponse(string ans)
         {
             if (String.IsNullOrWhiteSpace(ans))
             {
@@ -216,6 +232,17 @@ namespace OutlineStorming
             JsonDocument document = JsonDocument.Parse(json);
             messageHistory.Add(document.RootElement);
 
+        }
+
+        public static void AddMessageToHistory(string role, string content)
+        {
+            if (String.IsNullOrWhiteSpace(content))
+            {
+                return;
+            }
+            string json = JsonSerializer.Serialize(new { role = role, content = content });
+            JsonDocument document = JsonDocument.Parse(json);
+            messageHistory.Add(document.RootElement);
         }
 
         public static void updateGPTSettings(string authkey, string sys, string model, int timeout)

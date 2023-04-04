@@ -14,6 +14,7 @@ using System.Reflection.Emit;
 using System.Security.Cryptography.Xml;
 using System.Diagnostics.Eventing.Reader;
 using System.Text.Json;
+using static OutlineStorming.DeepLCall;
 
 namespace OutlineStorming
 {
@@ -270,7 +271,15 @@ namespace OutlineStorming
             services.AddHttpClient();
             var provider = services.BuildServiceProvider();
             IHttpClientFactory _clientFactory = provider.GetRequiredService<IHttpClientFactory>();
+            IHttpClientFactory _clientFactoryDeepL = provider.GetRequiredService<IHttpClientFactory>();
 
+            DeepLCall.SetAuthKey(Properties.Settings.Default.deepLAuthKey);
+            DeepLCall.SetFreeProFlag(Properties.Settings.Default.deepLFreeProFlg);
+            DeepLCall.SetTimeout(Properties.Settings.Default.deepLTimeout);
+            DeepLCall.SetSrcLang(Properties.Settings.Default.deepLUserLang);
+            DeepLCall.SetDstLang(Properties.Settings.Default.deepLGPTLang);
+            DeepLCall.SetUserLangAuto(Properties.Settings.Default.deepLUserLangAuto);
+            DeepLCall.SetGPTLangAuto(Properties.Settings.Default.deepLGPTLangAuto);
 
             if (String.IsNullOrWhiteSpace(OutputHistory.Text))
             {
@@ -285,10 +294,6 @@ namespace OutlineStorming
                         checkedRows.Add(row);
                     }
                 }
-                //if (checkedRows.Count == 0)
-                //{
-                //    return;
-                //}
                 GptCall.setBaseParam(Properties.Settings.Default.dataAuthKey, Properties.Settings.Default.dataGPTsystem, Properties.Settings.Default.dataGPTmodel, Properties.Settings.Default.dataGPTTimeout, inputs);
             }
 
@@ -303,16 +308,29 @@ namespace OutlineStorming
             }
 
             OutputHistory.Focus();
-            OutputHistory.AppendText("\r\n\r\n<You>\r\n" + textBoxRequest.Text);
+            OutputHistory.AppendText("\r\n\r\n<You>\r\n" + explanation);
+            string translatedRequest = explanation;
+            if (Properties.Settings.Default.deepLTranslateRequestFlg)
+            {
+                string[] translatedRequestArray = await DeepLCall.CallDeepLTranslateAsync(explanation, translateType.TRANSLATE_TYPE_SEND, _clientFactoryDeepL);
+                translatedRequest = translatedRequestArray[1];
+                GptCall.AddMessageToHistory("user_before_translation", explanation);
+                OutputHistory.AppendText("\r\n\r\n<You:Translated>\r\n" + translatedRequest);
+            }
 
-
-            //string retGPT = await GptCall.CallGptAsync(explanation, _clientFactory);
-            // GptCall.CallGptAsyncメソッドを別のスレッドで呼び出す
-            Task<string> task = Task.Run(() => GptCall.CallGptAsync(explanation, _clientFactory));
+            Task<string> task = Task.Run(() => GptCall.CallGptAsync(translatedRequest, _clientFactory));
             FormLoading formLoading = new FormLoading();
             formLoading.Show();
             string retGPT = await task;
-            OutputHistory.AppendText("\r\n\r\n<GPT>\r\n" + retGPT.Replace("\n", "\r\n"));
+            string translatedGPTResponse = "";
+            OutputHistory.AppendText("\r\n\r\n<GPT>\r\n" + retGPT);
+            if (Properties.Settings.Default.deepLTranslateResponseFlg)
+            {
+                string[] translatedGPTResponseArray = await DeepLCall.CallDeepLTranslateAsync(retGPT, translateType.TRANSLATE_TYPE_RET, _clientFactoryDeepL);
+                translatedGPTResponse = translatedGPTResponseArray[1];
+                GptCall.AddMessageToHistory("assistant_after_translation", translatedGPTResponse);
+                OutputHistory.AppendText("\r\n\r\n<GPT:Translated>\r\n" + translatedGPTResponse.Replace("\n", "\r\n"));
+            }
             formLoading.Close();
         }
 
@@ -643,7 +661,24 @@ namespace OutlineStorming
                                 string outputContent = outputMessage.ContainsKey("content") ? outputMessage["content"].ToString() : "";
                                 outputContent = outputContent.Replace("\n", "\r\n");
 
-                                string roleTag = outputRole == "user" ? "\r\n<You>" : "\r\n<GPT>";
+                                //string roleTag = outputRole == "user" ? "\r\n<You>" : "\r\n<GPT>";
+                                //OutputHistory.AppendText($"{roleTag}\r\n{outputContent}\r\n");
+                                string roleTag = "";
+                                switch (outputRole)
+                                {
+                                    case "user":
+                                        roleTag = "\r\n<You>";
+                                        break;
+                                    case "assistant":
+                                        roleTag = "\r\n<GPT>";
+                                        break;
+                                    case "user_before_translation":
+                                        roleTag = "\r\n<You:Translated>";
+                                        break;
+                                    case "assistant_after_translation":
+                                        roleTag = "\r\n<GPT:Translated>";
+                                        break;
+                                }
                                 OutputHistory.AppendText($"{roleTag}\r\n{outputContent}\r\n");
                             }
 
@@ -666,6 +701,21 @@ namespace OutlineStorming
             using (MessageHistoryForm messageHistoryForm = new MessageHistoryForm())
             {
                 messageHistoryForm.ShowDialog();
+            }
+        }
+
+        private void deepLSettingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormDeepLSetting formDeepLSetting = new FormDeepLSetting();
+            formDeepLSetting.ShowDialog(this);
+            formDeepLSetting.Dispose();
+        }
+
+        private void textBoxRequest_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Control && e.KeyCode == Keys.Enter)
+            {
+                btnSendRequest_Click(sender, e);
             }
         }
     }

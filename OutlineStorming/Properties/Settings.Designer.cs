@@ -130,5 +130,125 @@ namespace OutlineStorming.Properties {
                 this["NeedsUpgrade"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("your_api_key_here")]
+        public string deepLAuthKey {
+            get {
+                return ((string)(this["deepLAuthKey"]));
+            }
+            set {
+                this["deepLAuthKey"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool deepLFreeProFlg {
+            get {
+                return ((bool)(this["deepLFreeProFlg"]));
+            }
+            set {
+                this["deepLFreeProFlg"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("60")]
+        public int deepLTimeout {
+            get {
+                return ((int)(this["deepLTimeout"]));
+            }
+            set {
+                this["deepLTimeout"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool deepLTranslateDatasetFlg {
+            get {
+                return ((bool)(this["deepLTranslateDatasetFlg"]));
+            }
+            set {
+                this["deepLTranslateDatasetFlg"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("JA")]
+        public string deepLUserLang {
+            get {
+                return ((string)(this["deepLUserLang"]));
+            }
+            set {
+                this["deepLUserLang"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("EN")]
+        public string deepLGPTLang {
+            get {
+                return ((string)(this["deepLGPTLang"]));
+            }
+            set {
+                this["deepLGPTLang"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool deepLTranslateRequestFlg {
+            get {
+                return ((bool)(this["deepLTranslateRequestFlg"]));
+            }
+            set {
+                this["deepLTranslateRequestFlg"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool deepLTranslateResponseFlg {
+            get {
+                return ((bool)(this["deepLTranslateResponseFlg"]));
+            }
+            set {
+                this["deepLTranslateResponseFlg"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool deepLUserLangAuto {
+            get {
+                return ((bool)(this["deepLUserLangAuto"]));
+            }
+            set {
+                this["deepLUserLangAuto"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool deepLGPTLangAuto {
+            get {
+                return ((bool)(this["deepLGPTLangAuto"]));
+            }
+            set {
+                this["deepLGPTLangAuto"] = value;
+            }
+        }
     }
 }

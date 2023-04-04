@@ -45,11 +45,11 @@
             // 
             // btnSave
             // 
-            btnSave.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            btnSave.Location = new Point(523, 381);
+            btnSave.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            btnSave.Location = new Point(482, 370);
             btnSave.Margin = new Padding(2, 1, 2, 1);
             btnSave.Name = "btnSave";
-            btnSave.Size = new Size(75, 35);
+            btnSave.Size = new Size(116, 46);
             btnSave.TabIndex = 0;
             btnSave.Text = "OK";
             btnSave.UseVisualStyleBackColor = true;
@@ -162,6 +162,8 @@
             // 
             // tableLayoutPanel1
             // 
+            tableLayoutPanel1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            tableLayoutPanel1.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             tableLayoutPanel1.ColumnCount = 2;
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 80F));
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20F));

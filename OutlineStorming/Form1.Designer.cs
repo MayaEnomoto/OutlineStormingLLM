@@ -58,6 +58,7 @@
             settingToolStripMenuItem = new ToolStripMenuItem();
             fileFormatToolStripMenuItem = new ToolStripMenuItem();
             gPTSettingToolStripMenuItem = new ToolStripMenuItem();
+            deepLSettingsToolStripMenuItem = new ToolStripMenuItem();
             tableLayoutPanel1 = new TableLayoutPanel();
             panel3 = new Panel();
             buttonEdit = new Button();
@@ -289,7 +290,7 @@
             labelRequest.Name = "labelRequest";
             labelRequest.Size = new Size(497, 50);
             labelRequest.TabIndex = 21;
-            labelRequest.Text = "Request to GPT";
+            labelRequest.Text = "Request to GPT (Send Request = \"Ctrl + Enter\")";
             labelRequest.TextAlign = ContentAlignment.BottomLeft;
             // 
             // textBoxRequest
@@ -302,6 +303,7 @@
             textBoxRequest.Name = "textBoxRequest";
             textBoxRequest.Size = new Size(497, 200);
             textBoxRequest.TabIndex = 22;
+            textBoxRequest.KeyDown += textBoxRequest_KeyDown;
             // 
             // btnClearHistory
             // 
@@ -375,7 +377,7 @@
             // 
             // settingToolStripMenuItem
             // 
-            settingToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { fileFormatToolStripMenuItem, gPTSettingToolStripMenuItem });
+            settingToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { fileFormatToolStripMenuItem, gPTSettingToolStripMenuItem, deepLSettingsToolStripMenuItem });
             settingToolStripMenuItem.Name = "settingToolStripMenuItem";
             settingToolStripMenuItem.Size = new Size(56, 20);
             settingToolStripMenuItem.Text = "Setting";
@@ -383,16 +385,23 @@
             // fileFormatToolStripMenuItem
             // 
             fileFormatToolStripMenuItem.Name = "fileFormatToolStripMenuItem";
-            fileFormatToolStripMenuItem.Size = new Size(139, 22);
+            fileFormatToolStripMenuItem.Size = new Size(151, 22);
             fileFormatToolStripMenuItem.Text = "File format";
             fileFormatToolStripMenuItem.Click += fileFormatToolStripMenuItem_Click;
             // 
             // gPTSettingToolStripMenuItem
             // 
             gPTSettingToolStripMenuItem.Name = "gPTSettingToolStripMenuItem";
-            gPTSettingToolStripMenuItem.Size = new Size(139, 22);
+            gPTSettingToolStripMenuItem.Size = new Size(151, 22);
             gPTSettingToolStripMenuItem.Text = "GPT settings";
             gPTSettingToolStripMenuItem.Click += gPTSettingToolStripMenuItem_Click;
+            // 
+            // deepLSettingsToolStripMenuItem
+            // 
+            deepLSettingsToolStripMenuItem.Name = "deepLSettingsToolStripMenuItem";
+            deepLSettingsToolStripMenuItem.Size = new Size(151, 22);
+            deepLSettingsToolStripMenuItem.Text = "DeepL settings";
+            deepLSettingsToolStripMenuItem.Click += deepLSettingsToolStripMenuItem_Click;
             // 
             // tableLayoutPanel1
             // 
@@ -504,7 +513,7 @@
             Margin = new Padding(2, 1, 2, 1);
             MinimumSize = new Size(960, 540);
             Name = "Form1";
-            Text = "Outline Storming GPT v1.5";
+            Text = "Outline Storming GPT v2.0";
             ((System.ComponentModel.ISupportInitialize)dataGridView).EndInit();
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
@@ -557,5 +566,6 @@
         private Button buttonExport;
         private Button buttonImport;
         private Button buttonEdit;
+        private ToolStripMenuItem deepLSettingsToolStripMenuItem;
     }
 }
