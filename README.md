@@ -4,6 +4,9 @@ English is below.
 # Outline Storming GPT
 
 このツールは、ChatGPTを使用してデータを定義し、整合性をテストし、改良するためのものです。単純に会話することもできますし、ゲームの設定や計算式を読み込んで想定レベルや経験値テーブルを作成することもできます。
+Ver2.0で、DeepL APIの呼び出しに対応しました。
+自動的に翻訳を挟んでChatGPTと入出力可能です。
+コードをなるべくChatGPTに書かせている為、大分統一性がないコードになってきました……
 
 ## ライセンス
 
@@ -28,6 +31,9 @@ OpenAIのWebサイトで事前にAuthキー（APIキー）を発行してくだ�
 # Outline Storming GPT
 
 This is a tool for defining data and testing consistency by using ChatGPT and improving it. It is possible to simply have a conversation, or to load game settings and formulas to create expected level and experience tables. 
+Ver. 2.0 supports calls to DeepL API.
+It is possible to input/output with ChatGPT while translating.
+The code is becoming much less consistent because we are having ChatGPT write as much of the code as possible: ......
 
 ## License 
 
