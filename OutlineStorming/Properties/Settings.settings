@@ -45,7 +45,7 @@
       <Value Profile="(Default)">JA</Value>
     </Setting>
     <Setting Name="deepLGPTLang" Type="System.String" Scope="User">
-      <Value Profile="(Default)">EN</Value>
+      <Value Profile="(Default)">EN-US</Value>
     </Setting>
     <Setting Name="deepLTranslateRequestFlg" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>

@@ -256,7 +256,7 @@
             btnSendRequest.Name = "btnSendRequest";
             btnSendRequest.Size = new Size(497, 50);
             btnSendRequest.TabIndex = 19;
-            btnSendRequest.Text = "Send Request";
+            btnSendRequest.Text = "Send Request (Ctrl + Enter)";
             btnSendRequest.UseVisualStyleBackColor = true;
             btnSendRequest.Click += btnSendRequest_Click;
             // 
@@ -290,7 +290,7 @@
             labelRequest.Name = "labelRequest";
             labelRequest.Size = new Size(497, 50);
             labelRequest.TabIndex = 21;
-            labelRequest.Text = "Request to GPT (Send Request = \"Ctrl + Enter\")";
+            labelRequest.Text = "Request to GPT";
             labelRequest.TextAlign = ContentAlignment.BottomLeft;
             // 
             // textBoxRequest

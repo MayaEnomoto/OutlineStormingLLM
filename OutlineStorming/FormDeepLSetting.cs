@@ -60,8 +60,22 @@ namespace OutlineStorming
             Properties.Settings.Default.deepLTranslateResponseFlg = checkBoxTranslateResponse.Checked;
             Properties.Settings.Default.deepLUserLangAuto = checkBoxUserAuto.Checked;
             Properties.Settings.Default.deepLGPTLangAuto = checkBoxGPTAuto.Checked;
-            Properties.Settings.Default.deepLUserLang = comboBoxUserLang.SelectedValue.ToString();
-            Properties.Settings.Default.deepLGPTLang = comboBoxGPTLang.SelectedValue.ToString();
+            try
+            {
+                Properties.Settings.Default.deepLUserLang = comboBoxUserLang.SelectedValue.ToString();
+            }
+            catch
+            {
+                Properties.Settings.Default.deepLUserLang = "JA";
+            }
+            try
+            {
+                Properties.Settings.Default.deepLGPTLang = comboBoxGPTLang.SelectedValue.ToString();
+            }
+            catch
+            {
+                Properties.Settings.Default.deepLGPTLang = "EN-US";
+            }
 
             Properties.Settings.Default.Save();
 
