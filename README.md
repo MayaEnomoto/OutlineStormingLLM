@@ -31,7 +31,7 @@ OpenAIのWebサイトで事前にAuthキー（APIキー）を発行してくだ�
 
 デフォルトのタイムアウトは60秒です。Chat GPTの現在の混雑状況を考慮して、180秒程度に延長することも良いかもしれません（GUI上で変更可能）。大きなデータセットを送信するとクラッシュする可能性があるため注意してください。
 
-# Outline Storming GPT
+# Outline Storming LLM
 
 This is a tool for defining data and testing consistency by using ChatGPT and improving it. It is possible to simply have a conversation, or to load game settings and formulas to create expected level and experience tables. 
 Ver. 2.0 supports calls to DeepL API.
